@@ -1,0 +1,30 @@
+This rails plugin creates a set of typed accessors for data types.
+This is very handy when you are interacting with a service that
+returns strings and you want them automatically turned into more
+useful types.
+
+Ex:
+
+  class Foo
+    float_accessor :float
+    date_accessor :date
+  end
+
+  >> f = Foo.new
+  => #<Foo:0xb7a3dd44>
+  >> f.float = "1.4"
+  => "1.4"
+  >> f.float
+  => 1.4
+  >> f.float = "1"
+  => "1"
+  >> f.float
+  => 1.0
+  >> f.date = "2009-10-30"
+  => "2009-10-30"
+  >> f.date
+  => #<Date: 4910269/2,0,2299161>
+  >> f.date.to_s
+  => "2009-10-30"
+
+This work was done by Patt Ladd.  Sean Dague has helped in packaging it.
