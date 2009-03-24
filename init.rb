@@ -5,12 +5,12 @@ class Class
     end
 
     def float_accessor( *symbols )
-        float_reader( *symbols )
+        attr_reader( *symbols )
         float_writer( *symbols )
     end
     
     def int_accessor( *symbols )
-        int_reader( *symbols )
+        attr_reader( *symbols )
         int_writer( *symbols )
     end
     
@@ -49,32 +49,12 @@ class Class
         end
     end
         
-    def float_reader( *symbols )
-        symbols.each do |symbol|
-            class_eval(<<-EOS, __FILE__, __LINE__)
-                def #{symbol}
-                    instance_variable_get("@#{symbol}")
-                end
-            EOS
-        end
-    end
-
     def float_writer( *symbols )
         symbols.each do |symbol|
             class_eval(<<-EOS, __FILE__, __LINE__)
                 def #{symbol}=(val)
-                    if !val.respond_to?('to_f') then raise ArgumentError, "#{symbol} must be float" end
+                    if !val.respond_to?('to_f') then raise ArgumentError, "#{symbol} must be Float" end
                     instance_variable_set("@#{symbol}", val.to_f)
-                end
-            EOS
-        end
-    end
-
-    def int_reader( *symbols )
-        symbols.each do |symbol|
-            class_eval(<<-EOS, __FILE__, __LINE__)
-                def #{symbol}
-                    instance_variable_get("@#{symbol}")
                 end
             EOS
         end
@@ -84,7 +64,7 @@ class Class
         symbols.each do |symbol|
             class_eval(<<-EOS, __FILE__, __LINE__)
                 def #{symbol}=(val)
-                    if !val.respond_to?('to_i') then raise ArgumentError, "#{symbol} must be int" end
+                    if !val.respond_to?('to_i') then raise ArgumentError, "#{symbol} must be Integer" end
                     instance_variable_set("@#{symbol}", val.to_i)
                 end
             EOS
