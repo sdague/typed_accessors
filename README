@@ -1,9 +1,12 @@
-This rails plugin creates a set of typed accessors for data types.
-This is very handy when you are interacting with a service that
-returns strings and you want them automatically turned into more
-useful types.
+= Overview
 
-Ex:
+Typed accessors creates a set of accessors with a predefined typed.
+Often when dealing with webservices all the data comes back as
+strings, but you really want to be working with these things as
+numbers or dates.  Manually converting them is duplication, and can be
+error prone.
+
+== Example
 
   class Foo
     float_accessor :float
@@ -27,4 +30,21 @@ Ex:
   >> f.date.to_s
   => "2009-10-30"
 
-This work was done by Patt Ladd.  Sean Dague has helped in packaging it.
+== Installation
+
+First install the gem
+
+  gem install typed_accesors
+
+Then include it in your environment
+
+  require "typed_accessors"
+
+== Authors
+
+Creator: Pat Ladd
+Packager: Sean Dague
+
+== License
+
+This is released under an MIT license, see COPYING for full details.
