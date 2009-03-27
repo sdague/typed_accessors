@@ -74,7 +74,7 @@ spec = Gem::Specification.new do |s|
   s.has_rdoc = true 
   s.extra_rdoc_files = ["README", "COPYING"]
   s.rdoc_options.concat ['--main', 'README']
-
+  s.rdoc_options.concat ['--accessor int_accessor=RW --accessor int_reader=R --accessor int_writer=W --accessor float_accessor=RW --accessor float_reader=R --accessor float_writer=W --accessor boolean_yn_accessor=RW --accessor boolean_yn_reader=R --accessor booelan_yn_writer=W']
   s.author = "Pat Ladd" 
 end 
 
