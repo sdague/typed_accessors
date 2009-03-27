@@ -4,7 +4,9 @@ require 'rake/testtask'
 require 'rake/rdoctask'
 require 'rake/clean'
 require 'rake/contrib/sshpublisher'
+require 'rake/contrib/rubyforgepublisher'
 
+PKG_NAME = "typed_accessors"
 PKG_VERSION = "0.1"
 
 $VERBOSE = nil
@@ -49,10 +51,9 @@ Rake::RDocTask.new(:doc) { |rdoc|
   rdoc.main = 'README'
   rdoc.rdoc_files.include('lib/**/*.rb', 'README')
   rdoc.rdoc_files.include('COPYING')
-  rdoc.rdoc_dir = 'docs/api'
+  rdoc.rdoc_dir = 'docs/typed_accessors'
   rdoc.title    = "Typed Accessors"
   rdoc.options << "--include=examples --line-numbers --inline-source"
-  rdoc.options << "--accessor=ical_component,ical_property,ical_multi_property"
 }
 
 Gem::manage_gems 
@@ -86,6 +87,34 @@ end
 desc 'Install the gem globally (requires sudo)'
 task :install => :package do |t|
   `sudo gem install pkg/typed_accessors-#{PKG_VERSION}.gem`
+end
+
+
+desc "Upload Docs to RubyForge"
+task :publish_docs => [:doc] do
+    publisher = Rake::SshDirPublisher.new(
+                                          "sdague@rubyforge.org",
+                                          "/var/www/gforge-projects/sdaguegems",
+                                          "docs"
+                                          )
+    publisher.upload
+end
+
+task :release => [:clobber, :verify_committed, :spec, :publish_packages, :tag, :publish_news]
+
+desc "Verifies that there is no uncommitted code"
+task :verify_committed do
+  IO.popen('svn stat') do |io|
+    io.each_line do |line|
+      raise "\n!!! Do a svn commit first !!!\n\n" if line =~ /^\s*modified:\s*/
+    end
+  end
+end
+
+
+
+task :verify_user do
+  raise "RUBYFORGE_USER environment variable not set!" unless ENV['RUBYFORGE_USER']
 end
 
 task :lines do
