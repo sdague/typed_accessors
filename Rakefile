@@ -92,7 +92,8 @@ task :release => [ :package, :publish_docs ] do
     rubyforge = RubyForge.new
     rubyforge.configure
     rubyforge.login
-    rubyforge.add_release(PKG_NAME, PKG_NAME, "v#{PKG_VERSION}", *packages)
+    rubyforge.scrape_project("sdaguegems")
+    rubyforge.add_release("sdaguegems", PKG_NAME, "v#{PKG_VERSION}", *packages)
 end
 
 desc 'Install the gem globally (requires sudo)'
