@@ -10,14 +10,14 @@
 #   class MyClass
 #     float_accessor :distance
 #     int_accessor :count
-#     bool_yn_accessor :onfire?
+#     bool_yn_accessor :onfire
 #     date_accessor :day
 #   end
 
 class Class
     
     # Creates a boolean accessor.  It will convert and incoming string
-    # to a true / false value.  If the string is "y" or "Y" it will be
+    # to a true / false value.  If the string is "y" or "yes" it will be
     # true, otherwise false.
     def bool_yn_accessor( *symbols )
         attr_reader( *symbols )
@@ -66,7 +66,7 @@ class Class
         symbols.each do |symbol|
             class_eval(<<-EOS, __FILE__, __LINE__)
                 def #{symbol}=(val)
-                    if (val.is_a? String and val.upcase == 'Y') or val == true then
+                    if (val.is_a? String and val =~ /^(y(es)?|t(rue)?)$/i) or val == true then
                         instance_variable_set("@#{symbol}", true)
                     else
                         instance_variable_set("@#{symbol}", false)
