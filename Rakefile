@@ -88,12 +88,11 @@ end
 desc "Publish the release files to RubyForge."
 task :release => [ :package, :publish_docs ] do
     require 'rubyforge'
-    
     packages = %w( gem tgz zip ).collect{ |ext| "pkg/#{PKG_NAME}-#{PKG_VERSION}.#{ext}" }
-    
     rubyforge = RubyForge.new
+    rubyforge.configure
     rubyforge.login
-    rubyforge.add_release("sdaguegems", PKG_NAME, "v#{PKG_VERSION}", *packages)
+    rubyforge.add_release(PKG_NAME, PKG_NAME, "v#{PKG_VERSION}", *packages)
 end
 
 desc 'Install the gem globally (requires sudo)'
