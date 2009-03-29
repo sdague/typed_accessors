@@ -52,7 +52,7 @@ class Class
         symbols.each do |symbol|
             class_eval(<<-EOS, __FILE__, __LINE__)
                 def #{symbol}=(val)
-                    if val.class.to_s == 'String'
+                    if val.is_a? String
                         instance_variable_set("@#{symbol}", Date.parse(val))
                     else
                         instance_variable_set("@#{symbol}", val)
@@ -66,7 +66,7 @@ class Class
         symbols.each do |symbol|
             class_eval(<<-EOS, __FILE__, __LINE__)
                 def #{symbol}=(val)
-                    if val.upcase == 'Y' || val == true then
+                    if (val.is_a? String and val.upcase == 'Y') or val == true then
                         instance_variable_set("@#{symbol}", true)
                     else
                         instance_variable_set("@#{symbol}", false)
