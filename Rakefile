@@ -60,22 +60,23 @@ Gem::manage_gems
 require 'rake/gempackagetask'
 
 spec = Gem::Specification.new do |s| 
-  s.name = "typed_accessors" 
-  s.version = PKG_VERSION 
-  s.homepage = "http://github.com/sdague/typed_accessors" 
-  s.platform = Gem::Platform::RUBY 
-  s.summary = "Predefined typed accessors" 
-  s.description = "Defines easy to use additional functions to creating typed accessors, which auto convert the attributes to non string types"
-
-  s.files = FileList["{test,lib,docs,examples}/**/*"].to_a
-  s.files += ["Rakefile", "README", "COPYING" ]
-  s.require_path = "lib" 
-  s.autorequire = "typed_accessors" 
-  s.has_rdoc = true 
-  s.extra_rdoc_files = ["README", "COPYING"]
-  s.rdoc_options.concat ['--main', 'README']
-  s.rdoc_options.concat ['--accessor int_accessor="RW int" --accessor int_reader="R int" --accessor int_writer="W int" --accessor float_accessor="RW float" --accessor float_reader="R float" --accessor float_writer="W float" --accessor bool_yn_accessor="RW bool" --accessor bool_yn_reader="R bool" --accessor bool_yn_writer="W bool"']
-  s.author = "Pat Ladd" 
+    s.name = "typed_accessors" 
+    s.version = PKG_VERSION 
+    s.homepage = "http://github.com/sdague/typed_accessors" 
+    s.platform = Gem::Platform::RUBY 
+    s.summary = "Predefined typed accessors" 
+    s.description = "Defines easy to use additional functions to creating typed accessors, which auto convert the attributes to non string types"
+    s.rubyforge_project = "http://rubyforge.org/projects/sdaguegems"
+    s.files = FileList["{test,lib,docs,examples}/**/*"].to_a
+    s.files += ["Rakefile", "README", "COPYING" ]
+    s.require_path = "lib" 
+    s.autorequire = "typed_accessors" 
+    s.has_rdoc = true 
+    s.extra_rdoc_files = ["README", "COPYING"]
+    s.rdoc_options.concat ['--main', 'README']
+    s.rdoc_options.concat ['--accessor int_accessor="RW int" --accessor int_reader="R int" --accessor int_writer="W int" --accessor float_accessor="RW float" --accessor float_reader="R float" --accessor float_writer="W float" --accessor bool_yn_accessor="RW bool" --accessor bool_yn_reader="R bool" --accessor bool_yn_writer="W bool"']
+    s.author = "Sean Dague"
+    s.email = "sean@dague.net"
 end 
 
 Rake::GemPackageTask.new(spec) do |pkg| 
@@ -85,7 +86,7 @@ Rake::GemPackageTask.new(spec) do |pkg|
 end
 
 desc "Publish the release files to RubyForge."
-task :release => [ :package ] do
+task :release => [ :package, :publish_docs ] do
     require 'rubyforge'
     
     packages = %w( gem tgz zip ).collect{ |ext| "pkg/#{PKG_NAME}-#{PKG_VERSION}.#{ext}" }
@@ -100,7 +101,6 @@ task :install => :package do |t|
   `sudo gem install pkg/typed_accessors-#{PKG_VERSION}.gem`
 end
 
-
 desc "Upload Docs to RubyForge"
 task :publish_docs => [:doc] do
     publisher = Rake::SshDirPublisher.new(
@@ -111,7 +111,7 @@ task :publish_docs => [:doc] do
     publisher.upload
 end
 
-task :release => [:clobber, :verify_committed, :spec, :publish_packages, :tag, :publish_news]
+# task :release => [:clobber, :verify_committed, :spec, :publish_packages, :tag, :publish_news]
 
 desc "Verifies that there is no uncommitted code"
 task :verify_committed do
@@ -120,12 +120,6 @@ task :verify_committed do
       raise "\n!!! Do a svn commit first !!!\n\n" if line =~ /^\s*modified:\s*/
     end
   end
-end
-
-
-
-task :verify_user do
-  raise "RUBYFORGE_USER environment variable not set!" unless ENV['RUBYFORGE_USER']
 end
 
 task :lines do
