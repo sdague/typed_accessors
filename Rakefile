@@ -7,7 +7,7 @@ require 'rake/contrib/sshpublisher'
 require 'rake/contrib/rubyforgepublisher'
 
 PKG_NAME = "typed_accessors"
-PKG_VERSION = "0.1"
+PKG_VERSION = "0.2"
 
 $VERBOSE = nil
 TEST_CHANGES_SINCE = Time.now - 600 # Recent tests = changed in last 10 minutes
@@ -84,6 +84,17 @@ Rake::GemPackageTask.new(spec) do |pkg|
   pkg.need_zip = true
 end
 
+desc "Publish the release files to RubyForge."
+task :release => [ :package ] do
+    require 'rubyforge'
+    
+    packages = %w( gem tgz zip ).collect{ |ext| "pkg/#{PKG_NAME}-#{PKG_VERSION}.#{ext}" }
+    
+    rubyforge = RubyForge.new
+    rubyforge.login
+    rubyforge.add_release("sdaguegems", PKG_NAME, "v#{PKG_VERSION}", *packages)
+end
+
 desc 'Install the gem globally (requires sudo)'
 task :install => :package do |t|
   `sudo gem install pkg/typed_accessors-#{PKG_VERSION}.gem`
@@ -120,10 +131,10 @@ end
 task :lines do
   lines = 0
   codelines = 0
-  Dir.foreach("lib/typed_accessors") { |file_name|
+  Dir.foreach("lib") { |file_name|
     next unless file_name =~ /.*rb/
 
-    f = File.open("lib/typed_accessors/" + file_name)
+    f = File.open("lib/" + file_name)
 
     while line = f.gets
       lines += 1
