@@ -25,19 +25,12 @@ class TestTypedAccessors < Test::Unit::TestCase
         assert_instance_of Date, t.day
         assert_equal Date.today, t.day
 
-        # The only way I can figure out how to get this is via the IRB
-        # module, which just seems down right insane.
-        locale = IRB::Locale.new
-        
-        # the first case is ruby 1.8, the second is 1.9, and the lang
-        # should fail in a way that we're not hitting the non existant
-        # territory method on 1.8
-        if locale.lang =~ /^en_US/ or (locale.lang == "en" and locale.territory == "US")
-            t.day = Date.today.strftime("%m/%d/%Y")
-            assert_instance_of Date, t.day
-            assert_equal Date.today, t.day
+        # This should be pretty fool proof
+        t.day = Date.today.strftime("%m/%d/%Y")
+        if t.day.mon != Date.today.mon
+            t.day = Date.today.strftime("%d/%m/%Y")
         end
-        
+                
         assert_instance_of Date, t.day
         assert_equal Date.today, t.day
         
