@@ -34,8 +34,8 @@ class TestTypedAccessors < Test::Unit::TestCase
         # territory method on 1.8
         if locale.lang =~ /^en_US/ or (locale.lang == "en" and locale.territory == "US")
             t.day = Date.today.strftime("%m/%d/%Y")
-        else
-            t.day = Date.today.strftime("%d/%m/%Y")
+            assert_instance_of Date, t.day
+            assert_equal Date.today, t.day
         end
         
         assert_instance_of Date, t.day
