@@ -1,9 +1,7 @@
 require File.dirname(__FILE__) + '/test_helper.rb'
 
-# this will fix this test on Linux
-ENV["LANG"] = "en_US.UTF-8"
-
 require 'date'
+require "irb/locale"
 
 class TypedExample
     float_accessor :dollars
@@ -27,9 +25,19 @@ class TestTypedAccessors < Test::Unit::TestCase
         assert_instance_of Date, t.day
         assert_equal Date.today, t.day
 
-        # this might fail depending on locale, need to figure out a
-        # better way to handle that
-        t.day = Date.today.strftime("%m/%d/%Y")
+        # The only way I can figure out how to get this is via the IRB
+        # module, which just seems down right insane.
+        locale = IRB::Locale.new
+        
+        # the first case is ruby 1.8, the second is 1.9, and the lang
+        # should fail in a way that we're not hitting the non existant
+        # territory method on 1.8
+        if locale.lang =~ /^en_US/ or (locale.lang == "en" and locale.territory == "US")
+            t.day = Date.today.strftime("%m/%d/%Y")
+        else
+            t.day = Date.today.strftime("%d/%m/%Y")
+        end
+        
         assert_instance_of Date, t.day
         assert_equal Date.today, t.day
         
