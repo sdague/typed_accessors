@@ -1,0 +1,4 @@
+
+For more information on typed_accessors, see http://sdaguegems.rubyforge.org/typed_accessors
+
+

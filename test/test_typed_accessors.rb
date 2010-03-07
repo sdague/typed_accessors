@@ -1,8 +1,6 @@
-$:.unshift(File.dirname(__FILE__) + '/../lib')
+require File.dirname(__FILE__) + '/test_helper.rb'
 
-require 'test/unit'
 require 'date'
-require 'typed_accessors'
 
 class TypedExample
     float_accessor :dollars
@@ -12,6 +10,9 @@ class TypedExample
 end
 
 class TestTypedAccessors < Test::Unit::TestCase
+
+    def setup
+    end
     
     def test_date
         t = TypedExample.new
@@ -114,5 +115,11 @@ class TestTypedAccessors < Test::Unit::TestCase
         assert_instance_of TrueClass, t.onfire
         assert_equal true, t.onfire
     end
-end
 
+
+
+    
+    def test_truth
+        assert true
+    end
+end
