@@ -1,5 +1,8 @@
 require File.dirname(__FILE__) + '/test_helper.rb'
 
+# this will fix this test on Linux
+ENV["LANG"] = "en_US.UTF-8"
+
 require 'date'
 
 class TypedExample
