@@ -5,7 +5,7 @@ require 'fileutils'
 require './lib/typed_accessors'
 
 Hoe.plugin :newgem
-# Hoe.plugin :website
+Hoe.plugin :website
 # Hoe.plugin :cucumberfeatures
 
 # Generate all the Rake tasks

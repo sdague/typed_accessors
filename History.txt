@@ -1,5 +1,6 @@
 === 0.3.0 2010-03-07
-* Convert to newgem style package
+* 1 major enhancement:
+  * Convert to newgem style package
 
 === 0.2.0 2009-03-29
 
