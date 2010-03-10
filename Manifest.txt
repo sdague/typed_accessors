@@ -3,7 +3,7 @@ Manifest.txt
 PostInstall.txt
 README.rdoc
 Rakefile
-config/website.yml.sample
+config/website.yml
 lib/typed_accessors.rb
 lib/typed_accessors/class.rb
 script/console
