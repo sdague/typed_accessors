@@ -47,26 +47,31 @@ error prone.</p>
 <p><pre class='syntax'><span class="ident">sudo</span> <span class="ident">gem</span> <span class="ident">install</span> <span class="ident">typed_accessors</span></pre></p>
 <h2>The basics</h2>
 <h2>Demonstration of usage</h2>
-class Foo
-float_accessor :float
-date_accessor :date
-end
-&gt;&gt; f = Foo.new
-=&gt; #<Foo:0xb7a3dd44>
-&gt;&gt; f.float = &#8220;1.4&#8221;
-=&gt; &#8220;1.4&#8221;
-&gt;&gt; f.float
-=&gt; 1.4
-&gt;&gt; f.float = &#8220;1&#8221;
-=&gt; &#8220;1&#8221;
-&gt;&gt; f.float
-=&gt; 1.0
-&gt;&gt; f.date = &#8220;2009-10-30&#8221;
-=&gt; &#8220;2009-10-30&#8221;
-&gt;&gt; f.date
-=&gt; #&lt;Date: 4910269/2,0,2299161&gt;
-&gt;&gt; f.date.to_s
-=&gt; &#8220;2009-10-30&#8221;
+<p><pre class='syntax'>
+  <span class="keyword">class </span><span class="class">Foo</span>
+    <span class="ident">float_accessor</span> <span class="symbol">:float</span>
+    <span class="ident">date_accessor</span> <span class="symbol">:date</span>
+  <span class="keyword">end</span>
+
+  <span class="punct">&gt;&gt;</span> <span class="ident">f</span> <span class="punct">=</span> <span class="constant">Foo</span><span class="punct">.</span><span class="ident">new</span>
+  <span class="punct">=&gt;</span> <span class="comment">#&lt;Foo:0xb7a3dd44&gt;</span>
+  <span class="punct">&gt;&gt;</span> <span class="ident">f</span><span class="punct">.</span><span class="ident">float</span> <span class="punct">=</span> <span class="punct">&quot;</span><span class="string">1.4</span><span class="punct">&quot;</span>
+  <span class="punct">=&gt;</span> <span class="punct">&quot;</span><span class="string">1.4</span><span class="punct">&quot;</span>
+  <span class="punct">&gt;&gt;</span> <span class="ident">f</span><span class="punct">.</span><span class="ident">float</span>
+  <span class="punct">=&gt;</span> <span class="number">1.4</span>
+  <span class="punct">&gt;&gt;</span> <span class="ident">f</span><span class="punct">.</span><span class="ident">float</span> <span class="punct">=</span> <span class="punct">&quot;</span><span class="string">1</span><span class="punct">&quot;</span>
+  <span class="punct">=&gt;</span> <span class="punct">&quot;</span><span class="string">1</span><span class="punct">&quot;</span>
+  <span class="punct">&gt;&gt;</span> <span class="ident">f</span><span class="punct">.</span><span class="ident">float</span>
+  <span class="punct">=&gt;</span> <span class="number">1.0</span>
+  <span class="punct">&gt;&gt;</span> <span class="ident">f</span><span class="punct">.</span><span class="ident">date</span> <span class="punct">=</span> <span class="punct">&quot;</span><span class="string">2009-10-30</span><span class="punct">&quot;</span>
+  <span class="punct">=&gt;</span> <span class="punct">&quot;</span><span class="string">2009-10-30</span><span class="punct">&quot;</span>
+  <span class="punct">&gt;&gt;</span> <span class="ident">f</span><span class="punct">.</span><span class="ident">date</span>
+  <span class="punct">=&gt;</span> <span class="comment">#&lt;Date: 4910269/2,0,2299161&gt;</span>
+  <span class="punct">&gt;&gt;</span> <span class="ident">f</span><span class="punct">.</span><span class="ident">date</span><span class="punct">.</span><span class="ident">to_s</span>
+  <span class="punct">=&gt;</span> <span class="punct">&quot;</span><span class="string">2009-10-30</span><span class="punct">&quot;</span>
+</pre></p>
+<h2><span class="caps">API</span> Documentation</h2>
+<p><span class="caps">API</span> documentation can be <a href="http://sdaguegems.rubyforge.org/typed_accessors/rdoc">found here</a></p>
 <h2>How to submit patches</h2>
 <p>Read the <a href="http://drnicwilliams.com/2007/06/01/8-steps-for-fixing-other-peoples-code/">8 steps for fixing other people&#8217;s code</a></p>
 <ul>
@@ -82,7 +87,7 @@ rake install_gem</pre>
 <h2>Contact</h2>
 <p>Comments are welcome. Send an email to <a href="mailto:sean@dague.net">Sean Dague</a> email</p>
     <p class="coda">
-      <a href="FIXME email">FIXME full name</a>, 9th March 2010<br>
+      <a href="http://dague.net">Sean Dague</a>, 10th March 2010<br>
       Theme extended from <a href="http://rb2js.rubyforge.org/">Paul Battley</a>
     </p>
 </div>

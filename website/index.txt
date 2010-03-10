@@ -17,6 +17,7 @@ h2. The basics
 
 h2. Demonstration of usage
 
+<pre syntax="ruby">
   class Foo
     float_accessor :float
     date_accessor :date
@@ -38,6 +39,11 @@ h2. Demonstration of usage
   => #<Date: 4910269/2,0,2299161>
   >> f.date.to_s
   => "2009-10-30"
+</pre>
+
+h2. API Documentation
+
+API documentation can be "found here":http://sdaguegems.rubyforge.org/typed_accessors/rdoc
 
 h2. How to submit patches
 
@@ -52,7 +58,6 @@ h3. Build and test instructions
 <pre>cd typed_accessors
 rake test
 rake install_gem</pre>
-
 
 h2. License
 
