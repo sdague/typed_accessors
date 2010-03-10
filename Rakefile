@@ -4,6 +4,8 @@ require 'hoe'
 require 'fileutils'
 require './lib/typed_accessors'
 
+ENV['VERSION'] = TypedAccessors::VERSION
+
 Hoe.plugin :newgem
 Hoe.plugin :website
 # Hoe.plugin :cucumberfeatures

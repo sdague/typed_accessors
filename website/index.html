@@ -1,11 +1,93 @@
-<html>
-	<head>
-		<meta http-equiv="Content-type" content="text/html; charset=utf-8">
-		<title>typed_accessors</title>
-		
-	</head>
-	<body id="body">
-		<p>This page has not yet been created for RubyGem <code>typed_accessors</code></p>
-		<p>To the developer: To generate it, update website/index.txt and run the rake task <code>website</code> to generate this <code>index.html</code> file.</p>
-	</body>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+  <link rel="stylesheet" href="stylesheets/screen.css" type="text/css" media="screen" />
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>
+      typed_accessors
+  </title>
+  <script src="javascripts/rounded_corners_lite.inc.js" type="text/javascript"></script>
+<style>
+
+</style>
+  <script type="text/javascript">
+    window.onload = function() {
+      settings = {
+          tl: { radius: 10 },
+          tr: { radius: 10 },
+          bl: { radius: 10 },
+          br: { radius: 10 },
+          antiAlias: true,
+          autoPad: true,
+          validTags: ["div"]
+      }
+      var versionBox = new curvyCorners(settings, document.getElementById("version"));
+      versionBox.applyCornersToAll();
+    }
+  </script>
+</head>
+<body>
+<div id="main">
+
+    <h1>typed_accessors</h1>
+    <div class="sidebar">
+      <div id="version" class="clickable" onclick='document.location = "http://rubyforge.org/projects/sdaguegems"; return false'>
+        <p>Get Version</p>
+        <a href="http://rubyforge.org/projects/sdaguegems" class="numbers">0.3.0</a>
+      </div>
+    </div>
+    <h2>What</h2>
+<p>Typed accessors creates a set of accessors with a predefined typed.<br />
+Often when dealing with webservices all the data comes back as<br />
+strings, but you really want to be working with these things as<br />
+numbers or dates.  Manually converting them is duplication, and can be<br />
+error prone.</p>
+<h2>Installing</h2>
+<p><pre class='syntax'><span class="ident">sudo</span> <span class="ident">gem</span> <span class="ident">install</span> <span class="ident">typed_accessors</span></pre></p>
+<h2>The basics</h2>
+<h2>Demonstration of usage</h2>
+class Foo
+float_accessor :float
+date_accessor :date
+end
+&gt;&gt; f = Foo.new
+=&gt; #<Foo:0xb7a3dd44>
+&gt;&gt; f.float = &#8220;1.4&#8221;
+=&gt; &#8220;1.4&#8221;
+&gt;&gt; f.float
+=&gt; 1.4
+&gt;&gt; f.float = &#8220;1&#8221;
+=&gt; &#8220;1&#8221;
+&gt;&gt; f.float
+=&gt; 1.0
+&gt;&gt; f.date = &#8220;2009-10-30&#8221;
+=&gt; &#8220;2009-10-30&#8221;
+&gt;&gt; f.date
+=&gt; #&lt;Date: 4910269/2,0,2299161&gt;
+&gt;&gt; f.date.to_s
+=&gt; &#8220;2009-10-30&#8221;
+<h2>How to submit patches</h2>
+<p>Read the <a href="http://drnicwilliams.com/2007/06/01/8-steps-for-fixing-other-peoples-code/">8 steps for fixing other people&#8217;s code</a></p>
+<ul>
+	<li>github: <a href="http://github.com/sdague/typed_accessors/tree/master">http://github.com/sdague/typed_accessors/tree/master</a></li>
+</ul>
+<pre>git clone git://github.com/sdague/typed_accessors.git</pre>
+<h3>Build and test instructions</h3>
+<pre>cd typed_accessors
+rake test
+rake install_gem</pre>
+<h2>License</h2>
+<p>This code is free to use under the terms of the <span class="caps">MIT</span> license.</p>
+<h2>Contact</h2>
+<p>Comments are welcome. Send an email to <a href="mailto:sean@dague.net">Sean Dague</a> email</p>
+    <p class="coda">
+      <a href="FIXME email">FIXME full name</a>, 9th March 2010<br>
+      Theme extended from <a href="http://rb2js.rubyforge.org/">Paul Battley</a>
+    </p>
+</div>
+
+<!-- insert site tracking codes here, like Google Urchin -->
+
+</body>
 </html>
